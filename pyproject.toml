@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "md2pdf-resume"
-version = "0.1.0"
+version = "0.1.1"
 description = "Generate PDF resumes from Markdown"
 readme = "README.md"
 license = "MIT"
