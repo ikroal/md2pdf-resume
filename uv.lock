@@ -240,7 +240,7 @@ dependencies = [
     { name = "typer" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "mypy" },
     { name = "pytest" },
@@ -251,15 +251,18 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "markdown", specifier = ">=3.5,<4.0" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
     { name = "playwright", specifier = ">=1.40,<2.0" },
     { name = "pypdf", specifier = ">=3.0,<5.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.3" },
     { name = "typer", specifier = ">=0.9,<1.0" },
-    { name = "types-markdown", marker = "extra == 'dev'" },
 ]
-provides-extras = ["dev"]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "mypy", specifier = ">=1.8" },
+    { name = "pytest", specifier = ">=7.0" },
+    { name = "ruff", specifier = ">=0.3" },
+    { name = "types-markdown" },
+]
 
 [[package]]
 name = "mdurl"
