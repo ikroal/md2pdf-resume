@@ -1,11 +1,13 @@
 # md2pdf-resume
 
+[![CI](https://github.com/ikroal/md2pdf-resume/actions/workflows/ci.yml/badge.svg)](https://github.com/ikroal/md2pdf-resume/actions/workflows/ci.yml)
+
 Generate PDF resumes from Markdown.
 
 ## Install
 
 ```bash
-pip install -e .
+uv pip install -e .
 playwright install chromium
 ```
 
@@ -31,9 +33,9 @@ md2pdf-resume generate --md resume.md --template default
 ## Development
 
 ```bash
-pip install -e ".[dev]"
-pytest -m "not integration"
-ruff format src/ tests/
-ruff check src/ tests/
-mypy src/
+uv sync --dev
+uv run pytest tests/ -v -m "not integration"
+uv run ruff format src/ tests/
+uv run ruff check src/ tests/
+uv run mypy src/
 ```
