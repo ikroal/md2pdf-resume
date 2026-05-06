@@ -4,6 +4,7 @@ from pathlib import Path
 
 import typer
 
+from md2pdf_resume import __version__
 from md2pdf_resume.config import DEFAULTS, TEMPLATES_DIR, get_template_md_path
 from md2pdf_resume.utils import check_playwright_browser, copy_template_file
 
@@ -11,6 +12,17 @@ app = typer.Typer(
     name="md2pdf-resume",
     help="Generate PDF resumes from Markdown.",
 )
+
+
+@app.callback(invoke_without_command=True)
+def _version_callback(
+    version: bool = typer.Option(  # noqa: B008
+        False, "--version", "-v", help="Show version and exit."
+    ),
+) -> None:
+    if version:
+        typer.echo(f"md2pdf-resume {__version__}")
+        raise typer.Exit()
 
 
 @app.command()
