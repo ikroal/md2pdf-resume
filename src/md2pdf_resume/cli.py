@@ -41,12 +41,11 @@ def init(
 @app.command()
 def generate(
     md: Path = typer.Option(Path(str(DEFAULTS["md"])), help="Markdown file path."),  # noqa: B008
-    css: Path = typer.Option(Path(str(DEFAULTS["css"])), help="CSS file path."),  # noqa: B008
+    css: str = typer.Option(  # noqa: B008
+        str(DEFAULTS["css"]), help="CSS file path or built-in style name."
+    ),
     output: Path = typer.Option(  # noqa: B008
         None, help="Output PDF path (default: same as md with .pdf)."
-    ),
-    template: str = typer.Option(  # noqa: B008
-        None, help="Built-in template name (overrides --css)."
     ),
 ) -> None:
     """Generate a PDF from Markdown and CSS."""
@@ -54,17 +53,15 @@ def generate(
         typer.echo(f"Error: Markdown file not found: {md}", err=True)
         raise typer.Exit(code=1)
 
-    if template:
-        from md2pdf_resume.config import get_template_path
+    from md2pdf_resume.config import get_template_path
 
-        template_css = get_template_path(template)
-        if template_css is None:
-            typer.echo(f"Error: Unknown template: {template}", err=True)
+    resolved_css = get_template_path(css)
+    if resolved_css is None:
+        resolved_css = Path(css)
+        if not resolved_css.is_file():
+            typer.echo(f"Error: CSS not found: {css}", err=True)
             raise typer.Exit(code=1)
-        css = template_css
-    elif not css.is_file():
-        typer.echo(f"Error: CSS file not found: {css}", err=True)
-        raise typer.Exit(code=1)
+    css_path = resolved_css
 
     if output is None:
         output = md.with_suffix(".pdf")
@@ -79,5 +76,5 @@ def generate(
 
     from md2pdf_resume.converter import convert
 
-    convert(md, css, output)
+    convert(md, css_path, output)
     typer.echo(f"Generated: {output}")

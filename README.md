@@ -23,11 +23,11 @@ md2pdf-resume init --lang en
 # Edit resume.md and resume.css, then generate
 md2pdf-resume generate
 
-# Custom paths
+# Custom CSS file
 md2pdf-resume generate --md my_resume.md --css style.css --output my_resume.pdf
 
-# Use built-in template
-md2pdf-resume generate --md resume.md --template default
+# Use built-in style
+md2pdf-resume generate --md resume.md --css default
 ```
 
 ## Development
