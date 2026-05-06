@@ -9,12 +9,32 @@ description = "Generate PDF resumes from Markdown"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
+authors = [
+    { name = "ikroal", email = "ikroal@outlook.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Build Tools",
+]
+
 dependencies = [
     "typer>=0.9,<1.0",
     "markdown>=3.5,<4.0",
     "pypdf>=3.0,<5.0",
     "playwright>=1.40,<2.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/ikroal/md2pdf-resume"
+Repository = "https://github.com/ikroal/md2pdf-resume"
+Issues = "https://github.com/ikroal/md2pdf-resume/issues"
 
 [dependency-groups]
 dev = [
