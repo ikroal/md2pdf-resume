@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from md2pdf_resume.utils import check_playwright_browser, copy_template_file
+from md2pdf_resume.utils import copy_template_file
 
 
 def test_copy_template_file_creates_file(tmp_path: Path) -> None:

@@ -32,7 +32,7 @@ def init(
         copy_template_file(css_src, css_dst)
     except FileExistsError as e:
         typer.echo(f"Error: {e}", err=True)
-        raise typer.Exit(code=1)
+        raise typer.Exit(code=1) from None
 
     typer.echo(f"Created {md_dst} and {css_dst}")
     typer.echo("Edit them, then run: md2pdf-resume generate")
@@ -40,12 +40,12 @@ def init(
 
 @app.command()
 def generate(
-    md: Path = typer.Option(Path(str(DEFAULTS["md"])), help="Markdown file path."),
-    css: Path = typer.Option(Path(str(DEFAULTS["css"])), help="CSS file path."),
-    output: Path = typer.Option(
+    md: Path = typer.Option(Path(str(DEFAULTS["md"])), help="Markdown file path."),  # noqa: B008
+    css: Path = typer.Option(Path(str(DEFAULTS["css"])), help="CSS file path."),  # noqa: B008
+    output: Path = typer.Option(  # noqa: B008
         None, help="Output PDF path (default: same as md with .pdf)."
     ),
-    template: str = typer.Option(
+    template: str = typer.Option(  # noqa: B008
         None, help="Built-in template name (overrides --css)."
     ),
 ) -> None:

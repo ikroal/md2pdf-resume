@@ -81,9 +81,7 @@ async def _measure_scale(browser: object, html: str) -> float:
     return min(MAX_SCALE, max(DEFAULT_SCALE, ratio))
 
 
-async def _generate_pdf(
-    browser: object, html: str, output: Path, scale: float
-) -> None:
+async def _generate_pdf(browser: object, html: str, output: Path, scale: float) -> None:
     """Render HTML to PDF at the given scale."""
     from playwright.async_api import Browser
 

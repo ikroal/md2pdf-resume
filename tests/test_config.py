@@ -1,6 +1,9 @@
-from pathlib import Path
-
-from md2pdf_resume.config import DEFAULTS, TEMPLATES_DIR, get_template_md_path, get_template_path
+from md2pdf_resume.config import (
+    DEFAULTS,
+    TEMPLATES_DIR,
+    get_template_md_path,
+    get_template_path,
+)
 
 
 def test_templates_dir_exists() -> None:
