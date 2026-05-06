@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 
 from typer.testing import CliRunner
@@ -5,6 +6,11 @@ from typer.testing import CliRunner
 from md2pdf_resume.cli import app
 
 runner = CliRunner()
+
+
+def strip_ansi(text: str) -> str:
+    """Remove ANSI escape codes from text."""
+    return re.sub(r"\x1b\[[0-9;]*m", "", text)
 
 
 def test_init_creates_files(tmp_path: Path, monkeypatch: object) -> None:
@@ -46,8 +52,9 @@ def test_generate_missing_md_fails(tmp_path: Path, monkeypatch: object) -> None:
 
 def test_generate_help() -> None:
     result = runner.invoke(app, ["generate", "--help"])
+    output = strip_ansi(result.output)
 
     assert result.exit_code == 0
-    assert "--md" in result.output
-    assert "--css" in result.output
-    assert "--output" in result.output
+    assert "--md" in output
+    assert "--css" in output
+    assert "--output" in output
